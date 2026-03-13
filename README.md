@@ -45,22 +45,7 @@ Or open MySQL Workbench and run each file via:
 
 ---
 
-## 🗂️ Database Schema (9 Tables)
-
-| # | Table | Description |
-|---|-------|-------------|
-| 1 | customers | Customer accounts and profiles |
-| 2 | vendors | Seller accounts and store info |
-| 3 | categories | Product category hierarchy |
-| 4 | products | Product catalog |
-| 5 | orders | Customer orders |
-| 6 | order_items | Products within each order |
-| 7 | payments | Payment records per order |
-| 8 | reviews | Customer reviews + AI sentiment scores |
-| 9 | recommendations | AI-generated product recommendations |
-
----
-
+  
 ## ⚙️ Stored Procedures
 
 | Procedure | Role | Description |
