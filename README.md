@@ -11,9 +11,7 @@
 ## 📌 Project Overview
 OmniCart is a full-stack, AI-powered e-commerce platform that uses
 Machine Learning and Large Language Models to deliver personalized
-product recommendations to customers. Built as a dual submission for
-CS 2005 (Database Systems) and the Artificial Intelligence course.
-
+product recommendations to customers. 
 ---
 
 ## 🗄️ Database Setup
@@ -87,21 +85,4 @@ Or open MySQL Workbench and run each file via:
 | Automation | n8n |
 | Dataset | Amazon Product Reviews (Kaggle) |
 
----
 
-## 👥 Group Members
-
-| Name | Student ID | Role |
-|------|-----------|------|
-| Rayyan Aamir | 24K-0687 | Group Leader |
-| Ahmed Shah Rashdi | 24K-0709 | Member |
-| Muhammad Usaid Khan | 24K-0832 | Member |
-
----
-
-## 📚 Course Information
-
-- **Course:** CS 2005 — Database Systems
-- **Institution:** Namal University
-- **Semester:** Spring 2026
-- **Instructor:** Sir Shoaib Rauf
