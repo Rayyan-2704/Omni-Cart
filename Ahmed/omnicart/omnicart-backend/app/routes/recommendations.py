@@ -176,5 +176,5 @@ def explain_recommendation():
     return jsonify({
         "product":      product.to_dict(),
         "reason":       reason,
-        "generated_by": "GPT-4"
+        "generated_by": "Deepseek"
     }), 200
