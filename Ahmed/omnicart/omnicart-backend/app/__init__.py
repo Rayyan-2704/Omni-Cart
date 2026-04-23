@@ -3,9 +3,11 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_jwt_extended import JWTManager
 from flask_cors import CORS
 from config import config
+from flask_bcrypt import Bcrypt
 
 db = SQLAlchemy()
 jwt = JWTManager()
+bcrypt = Bcrypt()
 
 def create_app(env="default"):
     app = Flask(__name__)
@@ -24,6 +26,7 @@ def create_app(env="default"):
     from app.routes.reviews import reviews_bp
     from app.routes.recommendations import recommendations_bp
     from app.routes.admin import admin_bp
+    
 
     app.register_blueprint(auth_bp,            url_prefix="/api/auth")
     app.register_blueprint(products_bp,        url_prefix="/api/products")

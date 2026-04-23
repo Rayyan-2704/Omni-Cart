@@ -1,3 +1,4 @@
+from app.models.admin import Admin
 from app.models.customer import Customer
 from app.models.vendor import Vendor
 from app.models.category import Category
@@ -7,3 +8,4 @@ from app.models.order_item import OrderItem
 from app.models.payment import Payment
 from app.models.review import Review
 from app.models.recommendation import Recommendation
+from app.models.cart import Cart

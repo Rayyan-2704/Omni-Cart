@@ -6,12 +6,11 @@ class Product(db.Model):
     product_id  = db.Column(db.Integer, primary_key=True, autoincrement=True)
     vendor_id   = db.Column(db.Integer, db.ForeignKey("vendors.vendor_id"), nullable=False)
     category_id = db.Column(db.Integer, db.ForeignKey("categories.category_id"), nullable=False)
-    name        = db.Column(db.String(200), nullable=False)
+    name        = db.Column(db.String(100), nullable=False)
     description = db.Column(db.Text)
     price       = db.Column(db.Numeric(10, 2), nullable=False)
     stock_qty   = db.Column(db.Integer, default=0)
     brand       = db.Column(db.String(100))
-    rating      = db.Column(db.Numeric(3, 2), default=0.0)
     is_active   = db.Column(db.Boolean, default=True)
     created_at  = db.Column(db.DateTime, default=datetime.utcnow)
 
@@ -29,7 +28,6 @@ class Product(db.Model):
             "price":       float(self.price),
             "stock_qty":   self.stock_qty,
             "brand":       self.brand,
-            "rating":      float(self.rating) if self.rating else 0.0,
             "is_active":   self.is_active,
             "created_at":  self.created_at.isoformat()
         }

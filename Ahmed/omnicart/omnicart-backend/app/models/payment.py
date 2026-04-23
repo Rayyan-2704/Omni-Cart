@@ -4,8 +4,8 @@ from datetime import datetime
 class Payment(db.Model):
     __tablename__ = "payments"
     payment_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    order_id   = db.Column(db.Integer, db.ForeignKey("orders.order_id"), nullable=False)
-    method     = db.Column(db.Enum("cash", "card", "bank_transfer", "wallet"), nullable=False)
+    order_id   = db.Column(db.Integer, db.ForeignKey("orders.order_id"), nullable=False, unique=True)
+    method     = db.Column(db.Enum("credit_card", "debit_card", "cash_on_delivery", "bank_transfer"), nullable=False)
     status     = db.Column(db.Enum("pending", "completed", "failed", "refunded"), default="pending")
     amount     = db.Column(db.Numeric(10, 2), nullable=False)
     paid_at    = db.Column(db.DateTime, nullable=True)
