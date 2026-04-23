@@ -200,7 +200,7 @@ ORDER BY avg_rating DESC;
 -- 3. Vendor Sales Summary
 CREATE VIEW VendorSalesSummary AS
 SELECT v.vendor_id, v.store_name, p.name AS product_name, COALESCE(SUM(oi.quantity), 0) AS total_units_sold,
-		COALESCE(SUM(oi.quantity * oi.unit_price), 0) AS total_revenue, COALESCE(ROUND(AVG(r.rating), 1), 0.0) AS avg_product_rating
+	   COALESCE(SUM(oi.quantity * oi.unit_price), 0) AS total_revenue, COALESCE(ROUND(AVG(r.rating), 1), 0.0) AS avg_product_rating
 FROM vendors v
 JOIN products p ON v.vendor_id = p.vendor_id
 LEFT JOIN order_items oi ON p.product_id  = oi.product_id
