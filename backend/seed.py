@@ -174,9 +174,9 @@ def seed():
 
         # 5. Customers
         customers_raw = [
-            ("Ali Hassan", "ali.hassan@gmail.com", "0311-1111111", "House 5, Block A, Karachi"),
-            ("Fatima Noor", "fatima.noor@gmail.com", "0312-2222222", "Flat 3B, DHA Phase 6, Lahore"),
-            ("Usman Tariq", "usman.tariq@gmail.com", "0313-3333333", "Plot 12, G-9/2, Islamabad"),
+            ("Rayyan Aamir", "rayyan.aamir@gmail.com", "0311-1111111", "House 5, Block A, Karachi"),
+            ("Ahmed Rashdi", "ahmed.rashdi@gmail.com", "0312-2222222", "Flat 3B, DHA Phase 6, Lahore"),
+            ("Usaid Khan", "usaid.khan@gmail.com", "0313-3333333", "Plot 12, G-9/2, Islamabad"),
             ("Ayesha Malik", "ayesha.malik@gmail.com", "0314-4444444", "House 88, Clifton, Karachi"),
             ("Bilal Ahmed", "bilal.ahmed@gmail.com", "0315-5555555", "Street 4, Model Town, Lahore"),
             ("Zara Khan", "zara.khan@gmail.com", "0316-6666666", "Block C, Bahria Town, Rawalpindi"),
