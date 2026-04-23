@@ -209,12 +209,12 @@ def seed():
         # Each order: (customer_idx, [(product_idx, qty)], status, days_ago)
         # Order items are created inside the same block — confirmed below.
         orders_raw = [
-            (0, [(0, 1), (16, 1)], "delivered", 15),    # Ali: Sony XM5 + Spigen case
-            (0, [(5, 1)], "confirmed", 14),             # Ali: Galaxy S24
-            (1, [(2, 1), (17, 1)], "delivered", 13),    # Fatima: Bose QC45 + Logitech mouse
-            (1, [(10, 1)], "confirmed", 12),            # Fatima: Dell XPS 15
-            (2, [(3, 1), (4, 1)],  "delivered", 11),    # Usman: Sony speaker + JBL Flip
-            (2, [(13, 1)], "pending", 10),              # Usman: ASUS ROG
+            (0, [(0, 1), (16, 1)], "delivered", 15),    # Rayyan: Sony XM5 + Spigen case
+            (0, [(5, 1)], "confirmed", 14),             # Rayyan: Galaxy S24
+            (1, [(2, 1), (17, 1)], "delivered", 13),    # Ahmed: Bose QC45 + Logitech mouse
+            (1, [(10, 1)], "confirmed", 12),            # Ahmed: Dell XPS 15
+            (2, [(3, 1), (4, 1)],  "delivered", 11),    # Usaid: Sony speaker + JBL Flip
+            (2, [(13, 1)], "pending", 10),              # Usaid: ASUS ROG
             (3, [(6, 1)], "delivered", 9),              # Ayesha: iPhone 15 Pro
             (3, [(15, 2), (18, 1)],"confirmed", 8),     # Ayesha: 2x Anker hub + Samsung charger
             (4, [(7, 1), (19, 1)], "delivered", 7),     # Bilal: Xiaomi 14 + power bank
@@ -349,11 +349,11 @@ def seed():
         # for these products (realistic — items still sitting in cart)
         # (customer_idx, product_idx, quantity)
         cart_raw = [
-            (0,  7, 1),     # Ali browsing Xiaomi 14
-            (0, 19, 2),     # Ali wants 2x power banks
-            (1,  4, 1),     # Fatima eyeing JBL Flip 6
-            (1, 18, 1),     # Fatima — Samsung charger
-            (2,  6, 1),     # Usman considering iPhone 15 Pro
+            (0,  7, 1),     # Rayyan browsing Xiaomi 14
+            (0, 19, 2),     # Rayyan wants 2x power banks
+            (1,  4, 1),     # Ahmed eyeing JBL Flip 6
+            (1, 18, 1),     # Ahmed — Samsung charger
+            (2,  6, 1),     # Usaid considering iPhone 15 Pro
             (3,  9, 1),     # Ayesha — Google Pixel 8
             (4, 14, 1),     # Bilal — HP Spectre
             (5, 11, 1),     # Zara — MacBook Pro M3
