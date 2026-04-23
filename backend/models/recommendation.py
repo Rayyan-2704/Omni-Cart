@@ -18,7 +18,7 @@ class Recommendation(db.Model):
 
     __table_args__ = (
         db.UniqueConstraint("customer_id", "product_id", name="unique_recommendation"),
-        db.Index("idx_customer_rec", "customer_id")
+        db.Index("idx_customer_rec", "customer_id"),
     )
 
     def to_dict(self):

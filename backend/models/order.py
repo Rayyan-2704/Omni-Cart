@@ -17,7 +17,7 @@ class Order(db.Model):
     payment = db.relationship("Payment", back_populates="order", uselist=False, cascade="all, delete-orphan")
 
     __table_args__ = (
-        db.Index("idx_customer_order", "customer_id")
+        db.Index("idx_customer_order", "customer_id"),
     )
 
     def to_dict(self):

@@ -26,7 +26,7 @@ class Product(db.Model):
 
     __table_args__ = (
         db.Index("idx_vendor", "vendor_id"),
-        db.Index("idx_category", "category_id")
+        db.Index("idx_category", "category_id"),
     )
 
     def to_dict(self):

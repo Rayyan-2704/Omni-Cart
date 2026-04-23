@@ -19,7 +19,7 @@ class Review(db.Model):
 
     __table_args__ = (
         db.UniqueConstraint("customer_id", "product_id", name="unique_review"),
-        db.Index("idx_product_review", "product_id")
+        db.Index("idx_product_review", "product_id"),
     )
 
     def to_dict(self):
