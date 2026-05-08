@@ -26,7 +26,7 @@ class Order(db.Model):
             "customer_id": self.customer_id,
             "status": self.status,
             "total_amount": float(self.total_amount),
-            "placed_at": self.placed_at.isoformat()
+            "placed_at": self.placed_at.isoformat() if self.placed_at else None
         }
 
 

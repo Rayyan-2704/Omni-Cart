@@ -30,5 +30,5 @@ class Review(db.Model):
             "rating": self.rating,
             "comment": self.comment,
             "sentiment_score": float(self.sentiment_score) if self.sentiment_score else None,
-            "created_at": self.created_at.isoformat()
+            "created_at": self.created_at.isoformat() if self.created_at else None
         }

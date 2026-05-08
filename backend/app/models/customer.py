@@ -30,5 +30,5 @@ class Customer(db.Model):
             "address": self.address,
             "date_of_birth": str(self.date_of_birth) if self.date_of_birth else None,
             "is_active": self.is_active,
-            "created_at": self.created_at.isoformat()
+            "created_at": self.created_at.isoformat() if self.created_at else None
         }

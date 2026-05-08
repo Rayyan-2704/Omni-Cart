@@ -16,5 +16,5 @@ class Admin(db.Model):
             "admin_id": self.admin_id,
             "name": self.name,
             "email": self.email,
-            "created_at": self.created_at.isoformat()
+            "created_at": self.created_at.isoformat() if self.created_at else None
         }

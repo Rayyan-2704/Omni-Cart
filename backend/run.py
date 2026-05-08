@@ -6,7 +6,6 @@ app = create_app()
 
 if __name__ == "__main__":
     with app.app_context():
-        from sqlalchemy import text
         result = db.session.execute(text("SHOW TABLES"))
         tables = [row[0] for row in result]
         print(f"✅ Connected to DB. Tables found: {tables}")

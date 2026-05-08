@@ -28,5 +28,5 @@ class Recommendation(db.Model):
             "product_id": self.product_id,
             "score": float(self.score),
             "explanation": self.explanation,
-            "generated_at": self.generated_at.isoformat()
+            "generated_at": self.generated_at.isoformat() if self.generated_at else None
         }

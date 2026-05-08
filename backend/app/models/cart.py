@@ -26,5 +26,5 @@ class Cart(db.Model):
             "customer_id": self.customer_id,
             "product_id": self.product_id,
             "quantity": self.quantity,
-            "added_at": str(self.added_at).isoformat()
+            "added_at": self.added_at.isoformat() if self.added_at else None
         }

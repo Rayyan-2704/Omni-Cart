@@ -1,6 +1,3 @@
-# Importing every model here ensures Flask-SQLAlchemy's db.create_all()
-# can see every table. Import this module once in app.py.
-
 from .customer import Customer
 from .vendor import Vendor
 from .category import Category
