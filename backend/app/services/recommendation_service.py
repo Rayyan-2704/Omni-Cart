@@ -9,7 +9,6 @@ SENTIMENT_PATH = os.path.join(ML_DIR, "sentiment_model.pkl")
 
 _svd_model = None
 _tfidf_data = None
-_sentiment_fn = None
 
 def _load_svd():
     global _svd_model
@@ -24,14 +23,6 @@ def _load_tfidf():
         with open(TFIDF_PATH, "rb") as f:
             _tfidf_data = pickle.load(f)
     return _tfidf_data
-
-def _load_sentiment():
-    global _sentiment_fn
-    if _sentiment_fn is None:
-        with open(SENTIMENT_PATH, "rb") as f:
-            data = pickle.load(f)
-            _sentiment_fn = data["analyze_sentiment"]
-    return _sentiment_fn
 
 
 def get_svd_recommendations(user_id: str, product_ids: list, top_n: int = 5) -> list:
@@ -73,8 +64,12 @@ def get_similar_products(product_id: int, top_n: int = 5) -> list:
 
 def analyze_review_sentiment(text: str) -> dict:
     try:
-        fn = _load_sentiment()
-        score = fn(text)
+        from textblob import TextBlob
+        if not text or not str(text).strip():
+            score = 0.5
+        else:
+            polarity = TextBlob(str(text)).sentiment.polarity
+            score = round((polarity + 1) / 2, 3)
         if score >= 0.6: label = "positive"
         elif score >= 0.4: label = "neutral"
         else: label = "negative"
