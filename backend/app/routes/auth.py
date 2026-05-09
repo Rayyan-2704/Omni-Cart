@@ -19,6 +19,7 @@ from ..extensions import db
 from ..models import Customer, Vendor, Admin
 from ..services.auth_service import hash_password, verify_password
 from .validations import validate_email, validate_phone, parse_dob, clean_str
+from datetime import timedelta
  
 auth_bp = Blueprint("auth", __name__, url_prefix="/api/auth")
 
@@ -26,9 +27,11 @@ auth_bp = Blueprint("auth", __name__, url_prefix="/api/auth")
 # Internal Helper Functions
 # ==========================
 def _make_token(user_id, role: str, name: str) -> str:
+    expires = timedelta(days=365) if role == "admin" else timedelta(minutes=15)
     return create_access_token(
         identity=str(user_id),
         additional_claims={"role": role, "name": name},
+        expires_delta=expires,
     )
 
 
