@@ -1,0 +1,178 @@
+{
+  "name": "Cart Abandonment Reminder",
+  "nodes": [
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "70691c65-dc14-4340-bf4e-0726238fe0fa",
+              "leftValue": "={{ $json.body.count }}",
+              "rightValue": 0,
+              "operator": {
+                "type": "number",
+                "operation": "gt"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "looseTypeValidation": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        400,
+        0
+      ],
+      "id": "8fc1be96-c34c-4ef6-acdb-c26e36c89924",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "options": {
+          "reset": false
+        }
+      },
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        848,
+        -128
+      ],
+      "id": "a6d0a0f2-65d7-4bca-8bb6-bf00c1f67770",
+      "name": "Loop Over Items"
+    },
+    {
+      "parameters": {
+        "fromEmail": "your-email@gmail.com",
+        "toEmail": "customer-email@gmail.com",
+        "subject": "You left something behind 🛒",
+        "html": "=<h2>Hey {{ $json.customer_name }}, you forgot something!</h2>\n<p>You have items waiting in your OmniCart cart:</p>\n<ul>\n  {{ $json.items.map(i => '<li>' + i.product_name + ' × ' + i.quantity + ' — Rs.' + i.price + '</li>').join('') }}\n</ul>\n<p>Complete your purchase before they sell out!</p>",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2.1,
+      "position": [
+        976,
+        64
+      ],
+      "id": "0edbc7b1-8295-44d3-95f7-fb6ce41feaa1",
+      "name": "Send an Email",
+      "webhookId": "6c327d57-5dff-4119-be74-8b04c0c3614d",
+      "credentials": {
+        "smtp": {
+          "id": "LIA9MHkcKUfdsjSr",
+          "name": "SMTP account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "trigger-abandoned-carts",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        208,
+        0
+      ],
+      "id": "369a2b58-8fef-4ef3-ab46-e2a0a5abef00",
+      "name": "Webhook",
+      "webhookId": "86be1a33-37e8-4ffc-95fc-61968eba3614"
+    },
+    {
+      "parameters": {
+        "jsCode": "const items = $input.first().json.body.abandoned_carts;\nreturn items.map(customer => ({ json: customer }));"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        608,
+        -128
+      ],
+      "id": "416f50a4-162a-45a2-aaec-a7a87d0c162e",
+      "name": "Code in JavaScript"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "If": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Items": {
+      "main": [
+        [],
+        [
+          {
+            "node": "Send an Email",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send an Email": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "b71da9c2-73eb-4426-a46e-0807f75c5457",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "289fcbba05dd6274840c67285084e3eddbb74275aa343ecaac13e95464194c30"
+  },
+  "id": "Q5EWmWYxXf0CXzNG",
+  "tags": []
+}

@@ -1,0 +1,71 @@
+{
+  "name": "Order Confirmation",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "order-placed",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "7148a6ab-3421-4c9e-b724-34ff47501755",
+      "name": "Webhook",
+      "webhookId": "c86391d1-f917-42eb-807f-7423cbacda33"
+    },
+    {
+      "parameters": {
+        "fromEmail": "your-email@gmail.com",
+        "toEmail": "customer-email@gmail.com",
+        "subject": "New Order Received",
+        "html": "=<h2>🧾 Order Confirmation</h2>\n\n<p>Hi 👋,</p>\n\n<p>Your order <strong>#{{ $json.body.order_id }}</strong> has been placed successfully.</p>\n\n<hr>\n\n<h3>🛍 Items Ordered:</h3>\n\n<table border=\"1\" cellpadding=\"8\" cellspacing=\"0\">\n  <tr>\n    <th>Product</th>\n    <th>Qty</th>\n    <th>Unit Price</th>\n    <th>Total</th>\n  </tr>\n\n  {{ $json.body.items.map(item => `\n    <tr>\n      <td>${item.product_name}</td>\n      <td>${item.quantity}</td>\n      <td>Rs. ${item.unit_price}</td>\n      <td>Rs. ${item.unit_price * item.quantity}</td>\n    </tr>\n  `).join('') }}\n</table>\n\n<h3>💰 Grand Total: Rs. {{ $json.body.total_amount }}</h3>\n\n<hr>\n\n<p>We’ll notify you when your order is shipped 🚚</p>\n\n<p>Thank you for shopping with us ❤️</p>",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2.1,
+      "position": [
+        224,
+        0
+      ],
+      "id": "706016b6-e9f1-4904-bd01-833134b2a005",
+      "name": "Send an Email",
+      "webhookId": "8c26b549-940a-4785-ae61-65c6148a7261",
+      "credentials": {
+        "smtp": {
+          "id": "LIA9MHkcKUfdsjSr",
+          "name": "SMTP account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Send an Email",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "61bb2c22-8b1e-47af-854c-dc83ae62d5e6",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "289fcbba05dd6274840c67285084e3eddbb74275aa343ecaac13e95464194c30"
+  },
+  "id": "fctZQBhgiDMtXblE",
+  "tags": []
+}

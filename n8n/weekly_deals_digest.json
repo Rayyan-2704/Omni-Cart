@@ -1,0 +1,177 @@
+{
+  "name": "Weekly Deals Digest",
+  "nodes": [
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "70691c65-dc14-4340-bf4e-0726238fe0fa",
+              "leftValue": "={{ $json.body.count }}",
+              "rightValue": 0,
+              "operator": {
+                "type": "number",
+                "operation": "gt"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "looseTypeValidation": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        -208,
+        128
+      ],
+      "id": "ac858059-9d01-4b93-befe-bd4f9b3a1b8b",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "options": {
+          "reset": false
+        }
+      },
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        240,
+        0
+      ],
+      "id": "4c8d3da5-3545-457b-800a-56581ef50146",
+      "name": "Loop Over Items"
+    },
+    {
+      "parameters": {
+        "fromEmail": "your-email@gmail.com",
+        "toEmail": "customer-email@gmail.com",
+        "subject": "Your Weekly Picks from OmniCart",
+        "html": "=<h2>Hi {{ $json.customer_name }}, here are your picks this week!</h2>\n<p>Our AI picked these just for you:</p>\n<ol>\n  {{ $json.recommendations.map(r => '<li><strong>' + r.product_name + '</strong> — Rs.' + r.product_price + '<br><em>' + r.explanation + '</em></li>').join('') }}\n</ol>\n<p>Visit OmniCart to shop now!</p>\n<hr>\n<p style=\"font-size:12px;color:#888\">OmniCart Weekly Digest</p>",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2.1,
+      "position": [
+        368,
+        192
+      ],
+      "id": "a7a04958-d5dc-44e4-ac6c-3dcff5fa1523",
+      "name": "Send an Email",
+      "webhookId": "6c327d57-5dff-4119-be74-8b04c0c3614d",
+      "credentials": {
+        "smtp": {
+          "id": "LIA9MHkcKUfdsjSr",
+          "name": "SMTP account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "trigger-weekly-digest",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -400,
+        128
+      ],
+      "id": "b761ab29-9dd0-4f14-b3c3-e4acaaf59b4c",
+      "name": "Webhook",
+      "webhookId": "86be1a33-37e8-4ffc-95fc-61968eba3614"
+    },
+    {
+      "parameters": {
+        "jsCode": "const items = $input.first().json.body.customers;\nreturn items.map(customer => ({ json: customer }));"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        0,
+        0
+      ],
+      "id": "697bd9bf-1411-4220-b119-bca8ff052fe4",
+      "name": "Code in JavaScript"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "If": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Items": {
+      "main": [
+        [],
+        [
+          {
+            "node": "Send an Email",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send an Email": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "d63dfe3b-09eb-412f-aef1-0ed1f374fc8c",
+  "meta": {
+    "instanceId": "289fcbba05dd6274840c67285084e3eddbb74275aa343ecaac13e95464194c30"
+  },
+  "id": "Lfs2pyOHODnbmtJg",
+  "tags": []
+}
