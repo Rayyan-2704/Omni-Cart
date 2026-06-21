@@ -71,14 +71,14 @@ OmniCart is a full-stack, multi-vendor e-commerce platform that serves three dis
 │                    Flask REST API                           │
 │  auth │ customer │ orders │ vendor │ admin │ reviews        │
 │  recommendations │ queries                                  │
-└──────┬──────────────────────────┬────────────────────────────┘
+└──────┬──────────────────────────┬───────────────────────────┘
        │                          │
        ▼                          ▼
-┌─────────────┐        ┌──────────────────────┐
-│  MySQL 8.0  │        │   ML / AI Layer       │
-│  11 tables  │        │  SVD · TF-IDF · kNN   │
+┌─────────────┐        ┌────────────────────────┐
+│  MySQL 8.0  │        │   ML / AI Layer        │
+│  11 tables  │        │  SVD · TF-IDF · kNN    │
 │  3 views    │        │  TextBlob · Llama 3.1  │
-│  5 procs    │        └──────────────────────┘
+│  5 procs    │        └────────────────────────┘
 │  5 triggers │
 └─────────────┘
        │
